@@ -5,7 +5,7 @@ std::string emailLeft;
 std::string emailRight;
 std::string dictionaryLeft {"!#$%&'*+-/=?^_`{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789."};
 std::string dictionaryRight {"-.ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"};
-//Функция подсёта количества символов в левой строке
+
 int counterSL = 0;
 int nummberSL (std::string email){
   for(int i = 0; i < email.length(); i++){  
@@ -16,14 +16,14 @@ int nummberSL (std::string email){
   }
   return counterSL;
 } 
-//Функция подсёта количества символов в правой строке
+
 int counterSR;
 int nummberSR (std::string email, int counterSL){
   counterSR = email.length() - counterSL - 1;  
   return counterSR;
 }
 
-//Функция формирования левой строки
+
 std::string shareLeft(std::string email, int nummberSL){
   emailLeft.resize(counterSL);
   for(int i = 0; i < email.length(); i++){
@@ -35,7 +35,7 @@ std::string shareLeft(std::string email, int nummberSL){
   } 
   return emailLeft;
 }
-//Функция формирования правой строки
+
   std::string shareRight(std::string email, int counterSR, int counterSL){
   emailRight.resize(counterSR);
   for(int i = 0; i < counterSR; i++){
@@ -43,7 +43,7 @@ std::string shareLeft(std::string email, int nummberSL){
   } 
   return  emailRight;
 }
-//Функция проверки левой части на соответвие символам в словаре
+
 int counterCDL = 0;
 bool counterCDLbool = false;
 bool collationDictionaryLeft(std::string emailLeft){
@@ -54,11 +54,10 @@ bool collationDictionaryLeft(std::string emailLeft){
       }
     }  
   }
-  std::cout << counterCDL <<" "<< emailLeft.length()<<std::endl;
   return counterCDL == emailLeft.length() ? counterCDLbool=true : counterCDLbool=false;
 }
 
-//Функция проверки правой части на соответвие символам в словаре
+
 int counterCDR = 0;
 bool counterCDRbool = false;
 bool collationDictionaryRight(std::string emailRight){
@@ -69,7 +68,6 @@ bool collationDictionaryRight(std::string emailRight){
       }
     }  
   }
-  std::cout << counterCDR <<" "<< emailRight.length()<<std::endl;
   return counterCDR == emailRight.length() ? counterCDRbool = true : counterCDRbool = false;
 }
 
@@ -91,24 +89,21 @@ bool preliminaryCheck(std::string email, int counterSL, int counterSR){
   }
   return true;
 }
-
-
  
 int main() {
   std::cout << "Hello! This program checks the correctness of the email\n";
   std::cout << "=======================================================\n"; 
   std::cout << "Input email: ";
   getline(std::cin, email); 
-  std::cout<<nummberSL (email)<<"\n";
-  std::cout<<nummberSR (email, counterSL)<<"\n";
+  nummberSL (email);
+  nummberSR (email, counterSL);
   if(preliminaryCheck(email,counterSL, counterSR)==true){
-  std::cout<<shareLeft(email, counterSL)<<"\n";
-  std::cout<<shareRight(email, counterSR, counterSL)<<"\n";
-  std::cout<<collationDictionaryLeft(emailLeft)<<"\n";
-  std::cout<<collationDictionaryRight(emailRight)<<"\n";
+  shareLeft(email, counterSL);
+  shareRight(email, counterSR, counterSL);
+  collationDictionaryLeft(emailLeft);
+  collationDictionaryRight(emailRight);
     if(counterCDLbool == true && counterCDRbool == true){
       std::cout << "YES\n";
     } else {std::cout<<"NO\n";};
-  }else {std::cout<<"NoNO";};
-  
+  }else {std::cout<<"No";}; 
 }
